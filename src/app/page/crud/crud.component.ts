@@ -16,7 +16,7 @@ export class CrudComponent {
   titulo: any
   descricao: any
 
-  private apiUrl = 'http://localhost:3000/data';
+  private apiUrl = 'https://main--digitalcardapio.netlify.app/data';
 
   constructor(private http: HttpClient) { }
 
