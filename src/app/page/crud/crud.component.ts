@@ -16,7 +16,7 @@ export class CrudComponent {
   titulo: any
   descricao: any
 
-  private apiUrl = 'https://main--digitalcardapio.netlify.app/data';
+  private apiUrl = 'https://neon-dark-chard.glitch.me/data';
 
   constructor(private http: HttpClient) { }
 
