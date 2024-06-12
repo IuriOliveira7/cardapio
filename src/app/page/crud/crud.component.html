@@ -1,0 +1,12 @@
+<div class="body">
+    <button (click)="cadastrar()">CADASTRAR</button>
+<input type="text" [(ngModel)]="titulo">
+<input type="text" [(ngModel)]="descricao">
+
+
+    <div class="conteudo" *ngFor="let itens of dados">
+        <p>{{ itens.titulo }}</p>
+        <button (click)="deletarDados(itens.id)">DELETAR</button>
+    </div>
+
+</div>
