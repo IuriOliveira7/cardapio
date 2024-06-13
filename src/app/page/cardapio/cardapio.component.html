@@ -1,8 +1,14 @@
+<app-loaders *ngIf="loader == true"></app-loaders>
+
 <div class="body">
 
-    <div class="topbar" *ngFor="let item of dadosTituloCardapio">
+    <div class="topbar" >
+      <h3 *ngIf="tituloVazio == true">Cardápio Sem título</h3>
+      <p *ngIf="tituloVazio == true">• Cardápio •</p>
+      <ng-container *ngFor="let item of dadosTituloCardapio">
         <h3>{{item.titulo}}</h3>
         <p>• {{item.descricao}} •</p>
+      </ng-container>
     </div>
 
     <div class="conteudo">
@@ -21,4 +27,5 @@
           </div>
 
     </div>
+
 </div>

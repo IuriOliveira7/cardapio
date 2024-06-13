@@ -60,13 +60,13 @@
 
         <div class="inputs">
             <div class="input">
-                <span>Título Tipo de Prato</span>
+                <span>Título Tipo de Prato <p style="color: red;" *ngIf="tituloVazio == true">  (Adicione um Título)</p></span>
                 <input placeholder="Entrada/Sobremesa..." class="inp" [(ngModel)]="titulo"/>
             </div>
     
             <div class="input">
                 <span>Título Prato</span>
-                <input placeholder="ítulo Prato" class="inp" [(ngModel)]="tituloItem"/>
+                <input placeholder="Título Prato" class="inp" [(ngModel)]="tituloItem"/>
             </div>
 
             <div class="input">
@@ -85,6 +85,25 @@
 
         </div>
 
+        <div class="adicItens">
+               
+            <div class="item" *ngFor="let item of descricoes; let i = index">
+                <div class="infoPrato">
+                    <span>Título Prato</span>
+                    <p>{{item.titulo}}</p>
+                </div>
+                <div class="infoPrato">
+                    <span>Descrição Prato</span>
+                    <p>{{item.descricao}}</p>
+                </div>
+                <div class="infoPrato">
+                    <div class="ifo" style="text-align: end; cursor: pointer;" (click)="removeItem(i)">
+                        <span style="font-size: 2rem; color:brown;"><i class='bx bxs-x-circle'></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="tabela">
 
             <div class="titulos">
@@ -92,7 +111,7 @@
                     <span>Tipo de Prato</span>
                 </div>
                 <div class="titu">
-                    <span>Prato</span>
+                    <span>Pratos</span>
                 </div>
                 <div class="titu">
                     <span></span>

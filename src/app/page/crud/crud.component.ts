@@ -20,7 +20,10 @@ export class CrudComponent {
   ngOnInit(){
     this.carregarDadosTituloCardapio();
     this.carregarDadosItensCardapio();
+  }
 
+  removeItem(index: number) {
+    this.descricoes.splice(index, 1);
   }
 
   dadosTituloCardapio: any;
@@ -80,7 +83,7 @@ export class CrudComponent {
       );
   }
 
-
+  tituloVazio: boolean = false;
   titulo: any;
   tituloItem: any;
   descricaoItem: any;
@@ -93,12 +96,19 @@ export class CrudComponent {
       descricao: this.descricaoItem
     };
 
+    console.log("this.descricoes", this.descricoes)
     this.descricoes.push(descricao);
     this.tituloItem = '';
     this.descricaoItem = '';
   }
 
   cadastrarItem() {
+
+    if(this.titulo == ''){
+      this.tituloVazio = true;
+      return;
+    }
+
     const dados = {
       id: this.generateId(),
       titulo: this.titulo,
@@ -112,6 +122,7 @@ export class CrudComponent {
           this.titulo = '';
           this.tituloItem = '';
           this.descricaoItem = '';
+          this.descricoes = [];
         },
         error => {
           console.error('Erro ao cadastrar dados:', error);
