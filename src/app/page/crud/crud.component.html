@@ -1,12 +1,127 @@
 <div class="body">
-    <button (click)="cadastrar()">CADASTRAR</button>
-<input type="text" [(ngModel)]="titulo">
-<input type="text" [(ngModel)]="descricao">
+
+    <div class="crudTituloCardapio">
+
+        <div class="titulo">
+            <h3>Título do Cardápio</h3>
+        </div>
+
+        <div class="inputs">
+            <div class="input">
+                <span>Título Cardápio</span>
+                <input placeholder="Título Cardápio" class="inp" [(ngModel)]="tituloCardapio"/>
+            </div>
+    
+            <div class="input">
+                <span>Descrição Cardápio</span>
+                <input placeholder="Descrição Cardápio" class="inp" [(ngModel)]="descricaoTopoCardapio"/>
+            </div>
+        </div>
+
+        <div class="buttons">
+
+            <div class="button" (click)="cadastrarTitulo()">
+                <span>Adicionar</span>
+            </div>
+
+        </div>
+
+        <div class="tabela">
+
+            <div class="titulos">
+                <div class="titu">
+                    <span>Título Cardápio</span>
+                </div>
+                <div class="titu">
+                    <span>Descrição Cardápio</span>
+                </div>
+                <div class="titu">
+                    <span></span>
+                </div>
+            </div>
+
+            <div class="infosTabela" *ngFor="let itens of dadosTituloCardapio">
+                <div class="ifo">
+                    <span>{{ itens.titulo }}</span>
+                </div>
+                <div class="ifo">
+                    <span>{{ itens.descricao }}</span>
+                </div>
+                <div class="ifo" style="text-align: end;" (click)="deletarTituloDesc(itens.id)">
+                    <span style="font-size: 2rem; color:brown;"><i class='bx bxs-x-circle'></i></span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="titulo">
+            <h3>Itens do Cardápio</h3>
+        </div>
+
+        <div class="inputs">
+            <div class="input">
+                <span>Título Tipo de Prato</span>
+                <input placeholder="Entrada/Sobremesa..." class="inp" [(ngModel)]="titulo"/>
+            </div>
+    
+            <div class="input">
+                <span>Título Prato</span>
+                <input placeholder="ítulo Prato" class="inp" [(ngModel)]="tituloItem"/>
+            </div>
+
+            <div class="input">
+                <span>Descrição Prato</span>
+                <input placeholder="Descrição Prato" class="inp" [(ngModel)]="descricaoItem"/>
+            </div>
+
+            <div class="input">
+                <span></span>
+                <div class="buttons">
+                    <div class="button" (click)="adicionarDescricao()">
+                        <i class='bx bxs-add-to-queue'></i>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="tabela">
+
+            <div class="titulos">
+                <div class="titu">
+                    <span>Tipo de Prato</span>
+                </div>
+                <div class="titu">
+                    <span>Prato</span>
+                </div>
+                <div class="titu">
+                    <span></span>
+                </div>
+            </div>
+
+            <div class="infosTabela" *ngFor="let itens of dadosItens">
+                <div class="ifo">
+                    <span>{{ itens.titulo }}</span>
+                </div>
+                <div class="ifo">
+                    <span *ngFor="let descricao of itens.descricao"> {{ descricao.titulo }} |</span>
+                </div>
+                <div class="ifo" style="text-align: end;" (click)="deletarItem(itens.id)">
+                    <span style="font-size: 2rem; color:brown;"><i class='bx bxs-x-circle'></i></span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="buttons">
+
+            <div class="button" (click)="cadastrarItem()">
+                <span>Cadastrar Item</span>
+            </div>
+
+        </div>
 
 
-    <div class="conteudo" *ngFor="let itens of dados">
-        <p>{{ itens.titulo }}</p>
-        <button (click)="deletarDados(itens.id)">DELETAR</button>
     </div>
 
 </div>

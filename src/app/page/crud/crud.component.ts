@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
-import { DataService } from '../../service/dataService/data.service';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-crud',
@@ -13,51 +12,23 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 })
 export class CrudComponent {
 
-  titulo: any
-  descricao: any
-
-  private apiUrl = 'https://neon-dark-chard.glitch.me/data';
+  private apiUrlDados = 'https://tested-charm-plier.glitch.me/data';
+  private apiUrltitulo = 'https://tested-charm-plier.glitch.me/cardapio';
 
   constructor(private http: HttpClient) { }
 
   ngOnInit(){
-    this.carregarDados();
+    this.carregarDadosTituloCardapio();
+    this.carregarDadosItensCardapio();
+
   }
 
-  nextId = '1';
-
-  generateId(): string {
-    const currentId = this.nextId;
-    this.nextId = String(Number(this.nextId) + 1); // Incrementa o ID
-    return currentId;
-  }
-
-  cadastrar() {
-    const dados = {
-      id: this.generateId(),
-      titulo: this.titulo,
-      descricao: this.descricao
-    };
-
-    this.http.post<any>(this.apiUrl, dados)
+  dadosTituloCardapio: any;
+  carregarDadosTituloCardapio() {
+    this.http.get<any[]>(this.apiUrltitulo)
       .subscribe(
         response => {
-          console.log('Dados cadastrados com sucesso:', response);
-          this.carregarDados();
-        },
-        error => {
-          console.error('Erro ao cadastrar dados:', error);
-        }
-      );
-  }
-
-  dados: any;
-  carregarDados() {
-    this.http.get<any[]>(this.apiUrl)
-      .subscribe(
-        response => {
-          console.log('Dados carregados:', response);
-          this.dados = response;
+          this.dadosTituloCardapio = response;
         },
         error => {
           console.error('Erro ao carregar dados:', error);
@@ -65,14 +36,97 @@ export class CrudComponent {
       );
   }
 
-  deletarDados(id: number) {
-    const url = `${this.apiUrl}/${id}`;
+  dadosItens: any;
+  carregarDadosItensCardapio() {
+    this.http.get<any[]>(this.apiUrlDados)
+      .subscribe(
+        response => {
+          this.dadosItens = response;
+        },
+        error => {
+          console.error('Erro ao carregar dados:', error);
+        }
+      );
+  }
+
+
+  nextId = '1';
+  generateId(): string {
+    const currentId = this.nextId;
+    this.nextId = String(Number(this.nextId) + 1); // Incrementa o ID
+    return currentId;
+  }
+
+
+  tituloCardapio: any;
+  descricaoTopoCardapio: any;
+  cadastrarTitulo() {
+    const dados = {
+      id: this.generateId(),
+      titulo: this.tituloCardapio,
+      descricao: this.descricaoTopoCardapio,
+    };
+
+    this.http.post<any>(this.apiUrltitulo, dados)
+      .subscribe(
+        response => {
+          this.carregarDadosTituloCardapio();
+          this.tituloCardapio = '';
+          this.descricaoTopoCardapio = '';
+        },
+        error => {
+          console.error('Erro ao cadastrar dados:', error);
+        }
+      );
+  }
+
+
+  titulo: any;
+  tituloItem: any;
+  descricaoItem: any;
+  descricoes: any[] = [];
+  
+  adicionarDescricao() {
+    const descricao = {
+      id: this.generateId(),
+      titulo: this.tituloItem,
+      descricao: this.descricaoItem
+    };
+
+    this.descricoes.push(descricao);
+    this.tituloItem = '';
+    this.descricaoItem = '';
+  }
+
+  cadastrarItem() {
+    const dados = {
+      id: this.generateId(),
+      titulo: this.titulo,
+      descricao: this.descricoes,
+    };
+
+    this.http.post<any>(this.apiUrlDados, dados)
+      .subscribe(
+        response => {
+          this.carregarDadosItensCardapio();
+          this.titulo = '';
+          this.tituloItem = '';
+          this.descricaoItem = '';
+        },
+        error => {
+          console.error('Erro ao cadastrar dados:', error);
+        }
+      );
+  }
+
+
+
+  deletarTituloDesc(id: number) {
+    const url = `${this.apiUrltitulo}/${id}`;
     this.http.delete<any>(url)
       .subscribe(
         response => {
-          console.log('Dados excluídos com sucesso:', response);
-          // Após a exclusão, recarrega os dados
-          this.carregarDados();
+          this.carregarDadosTituloCardapio();
         },
         error => {
           console.error('Erro ao excluir dados:', error);
@@ -80,4 +134,16 @@ export class CrudComponent {
       );
   }
 
+  deletarItem(id: number) {
+    const url = `${this.apiUrlDados}/${id}`;
+    this.http.delete<any>(url)
+      .subscribe(
+        response => {
+          this.carregarDadosItensCardapio();
+        },
+        error => {
+          console.error('Erro ao excluir dados:', error);
+        }
+      );
+  }
 }
