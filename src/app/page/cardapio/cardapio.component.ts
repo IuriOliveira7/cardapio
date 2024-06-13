@@ -78,7 +78,4 @@ export class CardapioComponent {
       );
   }
 
-  navigateToCadastrar() {
-    this.router.navigate(['/cadastrar']); // Função de navegação
-  }
 }
