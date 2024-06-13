@@ -4,5 +4,5 @@ import { CardapioComponent } from './page/cardapio/cardapio.component';
 
 export const routes: Routes = [
     { path: 'cadastrar', component: CrudComponent },
-    { path: 'cardapio', component: CardapioComponent },
+    { path: '', component: CardapioComponent },
 ];
