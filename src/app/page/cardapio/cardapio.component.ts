@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cardapio',
@@ -41,7 +42,7 @@ export class CardapioComponent {
   private apiUrlDados = 'https://tested-charm-plier.glitch.me/data';
   private apiUrltitulo = 'https://tested-charm-plier.glitch.me/cardapio';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit(){
     this.carregarDadosTituloCardapio();
@@ -75,5 +76,9 @@ export class CardapioComponent {
           console.error('Erro ao carregar dados:', error);
         }
       );
+  }
+
+  navigateToCadastrar() {
+    this.router.navigate(['/cadastrar']); // Função de navegação
   }
 }
