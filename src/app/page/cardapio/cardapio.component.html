@@ -7,7 +7,7 @@
       <p *ngIf="tituloVazio == true">• Cardápio •</p>
       <ng-container *ngFor="let item of dadosTituloCardapio">
         <h3>{{item.titulo}}</h3>
-        <p>• {{item.descricao}} •</p>
+        <p *ngIf="item.descricao !== ''">• {{item.descricao}} •</p>
       </ng-container>
     </div>
 
