@@ -12,8 +12,8 @@ import { FormsModule } from '@angular/forms';
 })
 export class CrudComponent {
 
-  private apiUrlDados = 'https://tested-charm-plier.glitch.me/data';
-  private apiUrltitulo = 'https://tested-charm-plier.glitch.me/cardapio';
+  private apiUrlDados = 'https://curse-heavenly-mall.glitch.me/data';
+  private apiUrltitulo = 'https://curse-heavenly-mall.glitch.me/cardapio';
 
   constructor(private http: HttpClient) { }
 
