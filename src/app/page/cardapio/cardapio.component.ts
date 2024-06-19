@@ -39,8 +39,8 @@ export class CardapioComponent {
   ];
 
   
-  private apiUrlDados = 'https://tested-charm-plier.glitch.me/data';
-  private apiUrltitulo = 'https://tested-charm-plier.glitch.me/cardapio';
+  private apiUrlDados = 'https://veiled-hospitable-howler.glitch.me/data';
+  private apiUrltitulo = 'https://veiled-hospitable-howler.glitch.me/cardapio';
 
   constructor(private http: HttpClient) { }
 
